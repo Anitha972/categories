@@ -1,25 +1,37 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import DisplayCategories from '../views/DisplayCategories.vue';
+import MaterialCards from '../views/MaterialCards.vue';
+
+// User will be navigated to Categories page on page refresh on any page.
+function beforeRouteEnter(to, from, next) {
+  if(!from.name) {
+    next('/display-categories');
+  } else {
+    next();
+  }
+}
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/display-categories',
+    name: 'DisplayCategories',
+    component: DisplayCategories,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/material-cards',
+    name: 'MaterialCards',
+    component: MaterialCards,
+    beforeEnter: beforeRouteEnter,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/display-categories',
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
-export default router
+export default router;
