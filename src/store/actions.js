@@ -3,7 +3,6 @@ export default {
         commit('setState', payload);
     },
     async getCategories({ state, dispatch }) {
-        console.log('sare');
         const response = await fetch('https://api.publicapis.org/entries');
         const categories = await response.json();
         await dispatch('setState', {

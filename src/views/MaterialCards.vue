@@ -2,7 +2,6 @@
     <div class="cards">
         <div v-for="(item, index) in cardsData" :key="index">
             <div 
-               v-if="item.display" 
                class="card" 
                :class="[selectedCard==item.title?'highlight':'']"
                :id="[theme==='dark'?'dark-mode':'']"
@@ -14,7 +13,7 @@
                     {{ item.title }}
                 </p>
                 <p class="body">{{ item.body }}</p>
-                <button class="button" @click="deleteCard(item)">
+                <button class="button" @click="deleteCard(index)">
                     Delete
                 </button>
             </div>       
@@ -35,24 +34,21 @@ export default {
             {
                 title: 'v-text',
                 body: 'Updates the element text content.',
-                display: true,
             },
             {
                 title: 'v-html',
                 body: 'Updates the element innerHTML.',
-                display: true,
             },
             {
                 title: 'v-show',
                 body: 'Toggle the elements visibility based on the truthy-ness of the expression value.',
-                display: true,
             },
         ],
     };
   },
   methods: {
-    deleteCard(item) {
-        item.display = false;
+    deleteCard(index) {
+        this.cardsData.splice(index, 1);
     }
   }
 }
