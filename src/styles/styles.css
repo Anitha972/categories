@@ -1,0 +1,138 @@
+.nav {
+    position: fixed;
+    display: flex;
+    z-index: 2;
+    justify-content: right;
+    background-color: rgb(73, 161, 161);
+    padding-top: 30px;
+    height: 60px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+.input-box {
+    padding-left: 8px;
+    height: 30px;
+    width: 250px;
+    border-radius: 5px;
+}
+.search {
+    padding-right: 250px;
+    position: relative;
+}
+.suggestions-block {
+    background-color: white;
+    border-radius: 5px;
+}
+ul {
+    list-style: none;
+    margin: 0px;
+    padding-left: 0px;
+}
+.suggested-item {
+  padding: 10px 8px;
+    cursor: pointer;
+    font-family: Roboto,Arial,sans-serif;
+    font-weight: 600px;
+}
+.suggested-item:hover {
+    background-color: #dfd2d2;
+}
+.links {
+    font-family: Roboto,Arial,sans-serif;
+    text-decoration: none;
+    padding-right: 50px;
+    font-size: 20px;
+    font-weight: 600px;
+    color: white;
+}
+.links:hover {
+    color:yellow;
+}
+.image {
+    width: 30px;
+    height: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.submit-button {
+    position: absolute;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(243, 243, 127);
+    top: 0px;
+    right: 130px;
+    cursor: pointer;
+}
+
+.table {
+    position: relative;
+    z-index: 1;
+    margin-top: 100px;
+}
+table, th, td {
+    font-family: Roboto,Arial,sans-serif;
+    border: 1px solid rgb(95, 95, 92);
+    border-collapse: collapse;
+}
+th {
+    position: sticky;
+    background-color:rgb(139, 206, 133);
+    top: 95px;
+    padding: 15px;
+}
+td {
+    padding: 5px;
+}
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.cards {
+    font-family: Georgia, serif;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+.card {
+    width: 70%;
+    height: 180px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 2px rgb(192, 188, 188) solid;
+    margin-bottom: 30px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid rgb(192, 188, 188);
+    padding-left: 30px;
+    font-size: 20px;
+    font-weight: 600px;
+}
+.description {
+    padding-left: 30px;
+    padding-top: 20px;
+    font-size: 16px;
+}
+.delete-button {
+    background-color:rgb(133, 133, 185);
+    padding: 12px 30px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    margin-left: 30px;
+    margin-top: 40px;
+}
+#highlight {
+    border: 3px solid red;
+}
+.highlight-header {
+    border-bottom: 3px solid red;
+}
+p {
+    margin: 0px;
+}

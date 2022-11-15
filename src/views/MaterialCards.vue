@@ -3,8 +3,8 @@
         <div v-for="(item, index) in cardsData" :key="index">
             <div 
                class="card" 
-               :class="[selectedCard==item.title?'highlight':'']"
-               :id="[theme==='dark'?'dark-mode':'']"
+               :id="[selectedCard==item.title?'highlight':'']"
+               :class="[theme==='dark'?'dark-mode':'']"
             >
                 <p 
                   class="header" 
@@ -12,8 +12,8 @@
                 >
                     {{ item.title }}
                 </p>
-                <p class="body">{{ item.body }}</p>
-                <button class="button" @click="deleteCard(index)">
+                <p class="description">{{ item.body }}</p>
+                <button class="delete-button" @click="deleteCard(index)">
                     Delete
                 </button>
             </div>       
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'MaterialCards',
   computed: {
-    ...mapState(['selectedCard', 'theme']),
+    ...mapState(['selectedCard', 'theme', 'cards']),
   },
   data() {
     return {
@@ -47,62 +47,19 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['setState']),
+    // Remove the deleted card from the array and filter the updated list.
     deleteCard(index) {
         this.cardsData.splice(index, 1);
+        const cardsTitle = [];
+        for(let item of this.cardsData) {
+            cardsTitle.push(item.title);
+        }
+        this.setState({
+          stateName: 'cards',
+          value: cardsTitle
+        })
     }
-  }
+  },
 }
 </script>
-
-<style>
-.cards {
-    font-family: Georgia, serif;
-    margin-top: 100px;
-    margin-left: 20px;
-}
-.card {
-    width: 70%;
-    height: 180px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border: 2px rgb(192, 188, 188) solid;
-    margin-bottom: 30px;
-}
-.header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    border-bottom: 1px solid rgb(192, 188, 188);
-    padding-left: 30px;
-    font-size: 20px;
-    font-weight: 600px;
-}
-.body {
-    padding-left: 30px;
-    padding-top: 20px;
-    font-size: 16px;
-}
-.button {
-    background-color:rgb(133, 133, 185);
-    padding: 12px 30px;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    border: none;
-    margin-left: 30px;
-    margin-top: 40px;
-}
-.highlight {
-    border: 3px solid red;
-}
-.highlight-header {
-    border-bottom: 3px solid red;
-}
-p {
-    margin: 0px;
-}
-#dark-mode {
-  background-color: black;
-  color: white;
-}
-</style>

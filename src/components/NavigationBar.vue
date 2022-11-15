@@ -1,12 +1,32 @@
 <template>
   <div class="nav">
     <div class="search">
-      <input type=text v-model="enteredValue"/> 
-      <button @click="navigateToCards()" id="button">Search</button>
+      <input 
+        class="input-box"
+        type="text"
+        v-model="enteredValue" 
+        @keyup="collectMatchedValues()" 
+        @blur="hideSuggestionsBlock()"
+        @focus="()=>{
+          this.showSuggestions=true;
+        }"
+      /> 
+       <div class="suggestions-block" v-if="showSuggestions && matchedValues.length">
+          <ul>
+            <li
+             class="suggested-item"
+             v-for="(item, index) in matchedValues" :key="index"
+             @mousedown="updateInputValue(item)"
+            >
+              {{item}}
+            </li>
+          </ul> 
+       </div>
+      <button @click="navigateToCards()" class="submit-button">Search</button>
     </div>  
     <router-link to="/display-categories" class="links">Categories</router-link>
     <router-link to="/material-cards" class="links">Cards</router-link> 
-    <img :src="getImage" class="dark" @click="updateTheme()"/>
+    <img :src="getImage" class="image" @click="updateTheme()"/>
   </div> 
 </template>
 
@@ -19,10 +39,12 @@ export default {
   data() {
     return {
       enteredValue: '',
+      matchedValues: [],
+      showSuggestions: false,
     };
   },
   computed: {
-    ...mapState(['theme']),
+    ...mapState(['theme', 'cards']),
     getImage() {
       if (this.theme === 'dark') {
         return require('../assets/sun.png');
@@ -32,7 +54,7 @@ export default {
   },
   methods: {
     ...mapActions(['setState']),
-    // The selected theme of application will be stored in state.
+    // The selected theme of the application will be stored in state.
     updateTheme() {
       if (this.theme === 'dark') {
         this.setState({
@@ -46,56 +68,30 @@ export default {
         })
       }
     },
+    // Fetches all the matched card titles
+    collectMatchedValues() {
+      this.matchedValues=[];
+      if (this.enteredValue) {
+        this.matchedValues = this.cards.filter((value)=>value.startsWith(this.enteredValue));
+      }
+    },
+    updateInputValue(item) {
+      this.enteredValue = item;
+      this.showSuggestions = false;
+      this.matchedValues = [];
+    },
+    hideSuggestionsBlock() {
+      this.showSuggestions = false;
+    },
     navigateToCards() {
       this.setState({
         stateName: 'selectedCard',
         value: this.enteredValue,
       })
-      this.$router.push('/material-cards');
+      if (this.cards.includes(this.enteredValue)) {
+        this.$router.push('/material-cards');
+      }  
     }
   }
 }
 </script>
-
-<style>
-.nav {
-  position: fixed;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  background-color: rgb(73, 161, 161);
-  padding: 30px;
-  top: 0px;
-  left: 0px;
-  width: 97%;
-}
-.search {
-  padding-right: 250px;
-}
-input {
-  margin-right: 10px;
-  padding: 7px 32px;
-  border-radius: 5px;
-}
-button {
-  padding: 8px 24px;
-  border: none;
-  border-radius: 5px;
-  background-color: rgb(243, 243, 127);
-}
-.links {
-  font-family: Roboto,Arial,sans-serif;
-  text-decoration: none;
-  padding-right: 50px;
-  font-size: 20px;
-  font-weight: 600px;
-  color: white;
-}
-.links:hover {
-  color:yellow;
-}
-.dark {
-  width: 30px;
-  height: 30px;
-}
-</style>

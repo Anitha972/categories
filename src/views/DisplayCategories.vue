@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script>
+<script>9
 import { mapState, mapActions } from 'vuex';
 import Spinner from '../components/Spinner.vue';
 
@@ -40,26 +40,3 @@ export default {
 }
 </script>
 
-<style scoped>
-table, th, td {
-  font-family: Roboto,Arial,sans-serif;
-  border: 1px solid rgb(95, 95, 92);
-  border-collapse: collapse;
-}
-th {
-  position: sticky;
-  background-color:rgb(139, 206, 133);
-  top: 95px;
-  padding: 15px;
-}
-td {
-  padding: 5px;
-}
-.table {
-  margin-top: 100px;
-}
-.dark-mode {
-  background-color: black;
-  color: white;
-}
-</style>

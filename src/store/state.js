@@ -2,5 +2,6 @@ export default {
     tableHeadings: [],
     tableData: [],
     theme: 'light',
-    selectedCard: ''
+    selectedCard: '',
+    cards: ['v-text', 'v-html', 'v-show'],
 }
