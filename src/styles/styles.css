@@ -85,6 +85,17 @@ th {
 td {
     padding: 5px;
 }
+th:first-child {
+    position: sticky;
+    left: 8px;
+    z-index: 2;
+}
+td:first-child {
+    position: sticky;
+    left: 8px;
+    z-index: 1;
+    background-color:rgb(139, 206, 133);
+}
 .dark-mode {
     background-color: black;
     color: white;
